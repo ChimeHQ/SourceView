@@ -1,6 +1,7 @@
 # SourceView
 A TextKit 2 view built specifically to work with source code
 
+
 ## Contributing and Collaboration
 
 I prefer collaboration, and would love to find ways to work together if you have a similar project.
