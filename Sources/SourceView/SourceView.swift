@@ -45,18 +45,14 @@ open class SourceView: NSTextView {
 	}
 }
 
-extension NSTextView {
-
-}
-
 extension SourceView {
-	public override func moveToBeginningOfLine(_ sender: Any?) {
+	open override func moveToBeginningOfLine(_ sender: Any?) {
 		super.moveToBeginningOfLine(sender)
 
 		scrollRangeToVisible(NSRange(location: insertionLocation!, length: 0))
 	}
 
-	public override func moveToLeftEndOfLine(_ sender: Any?) {
+	open override func moveToLeftEndOfLine(_ sender: Any?) {
 		super.moveToLeftEndOfLine(sender)
 
 		let location = textContentStorage?.documentRange.location
@@ -67,16 +63,15 @@ extension SourceView {
 		scroll(NSPoint(x: 0.0, y: 0.0))
 	}
 
-	public override func invalidateTextContainerOrigin() {
+	open override func invalidateTextContainerOrigin() {
 		super.invalidateTextContainerOrigin()
-		print(textContainerOrigin)
 	}
 
-	public override func moveToRightEndOfLine(_ sender: Any?) {
+	open override func moveToRightEndOfLine(_ sender: Any?) {
 		super.moveToRightEndOfLine(sender)
 	}
 
-	public override func moveToRightEndOfLineAndModifySelection(_ sender: Any?) {
+	open override func moveToRightEndOfLineAndModifySelection(_ sender: Any?) {
 		// interestingly, it seems this isn't the default behavior
 		super.moveToRightEndOfLineAndModifySelection(sender)
 
