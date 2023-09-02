@@ -1,6 +1,9 @@
 import Foundation
 
-struct TextIndentationProcessor {
+public struct TextIndentationProcessor {
+	public init() {
+	}
+
 	func handleInsertTab() -> Bool {
 		return false
 	}
@@ -23,7 +26,7 @@ import AppKit
 
 extension TextIndentationProcessor {
 	@MainActor
-	func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+	public func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
 		switch commandSelector {
 		case #selector(NSTextView.insertTab(_:)):
 			return textView.withUndo {

@@ -1,6 +1,9 @@
 import Foundation
 
-struct TextMovementProcessor {
+public struct TextMovementProcessor {
+	public init() {
+	}
+
 	func moveToBeginningOfLine() -> Bool {
 		return false
 	}
@@ -23,7 +26,7 @@ import AppKit
 
 extension TextMovementProcessor {
 	@MainActor
-	func textView(_ aTextView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+	public func textView(_ aTextView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
 		switch commandSelector {
 		case #selector(NSTextView.moveWordLeft(_:)):
 			return handleMoveWordLeft(modifiyingSelection: false)
