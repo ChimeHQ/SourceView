@@ -39,8 +39,8 @@ final class ViewController: NSViewController {
 		scrollView.hasVerticalScroller = true
 
 		NSLayoutConstraint.activate([
-			scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100.0),
-			scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100.0),
+			scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400.0),
+			scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300.0),
 		])
 
 		scrollView.documentView = sourceView
@@ -49,4 +49,8 @@ final class ViewController: NSViewController {
 
 		self.view = scrollView
 	}
+}
+
+extension ViewController: NSTextViewDelegate {
+	
 }

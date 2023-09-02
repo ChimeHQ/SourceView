@@ -1,15 +1,14 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
-#if os(macOS)
 import AppKit
+import OSLog
 
-open class SourceView: NSTextView {
+open class SourceView: BaseTextView {
 	public override init(frame frameRect: NSRect, textContainer container: NSTextContainer?) {
 		precondition(container?.textLayoutManager != nil)
 
 		super.init(frame: frameRect, textContainer: container)
 	}
+
+	private let logger = Logger(subsystem: "com.chimehq.SourceView", category: "SourceView")
 
 	public init() {
 		let textContainer = NSTextContainer(size: CGSize(width: 0.0, height: 1.0e7))
@@ -42,45 +41,6 @@ open class SourceView: NSTextView {
 
 		// behaviors
 		allowsUndo = true
+//		isRichText = false
 	}
 }
-
-extension SourceView {
-	open override func moveToBeginningOfLine(_ sender: Any?) {
-		super.moveToBeginningOfLine(sender)
-
-		scrollRangeToVisible(NSRange(location: insertionLocation!, length: 0))
-	}
-
-	open override func moveToLeftEndOfLine(_ sender: Any?) {
-		super.moveToLeftEndOfLine(sender)
-
-		let location = textContentStorage?.documentRange.location
-
-		let fragment = textLayoutManager?.textLayoutFragment(for: location!)
-		let frame = fragment?.layoutFragmentFrame
-
-		scroll(NSPoint(x: 0.0, y: 0.0))
-	}
-
-	open override func invalidateTextContainerOrigin() {
-		super.invalidateTextContainerOrigin()
-	}
-
-	open override func moveToRightEndOfLine(_ sender: Any?) {
-		super.moveToRightEndOfLine(sender)
-	}
-
-	open override func moveToRightEndOfLineAndModifySelection(_ sender: Any?) {
-		// interestingly, it seems this isn't the default behavior
-		super.moveToRightEndOfLineAndModifySelection(sender)
-
-		guard let range = selectedTextRanges.last else {
-			return
-		}
-
-		scrollRangeToVisible(NSRange(location: NSMaxRange(range), length: 0))
-	}
-}
-
-#endif

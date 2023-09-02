@@ -1,6 +1,10 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
+
+let settings: [SwiftSetting] = [
+	.enableExperimentalFeature("StrictConcurrency")
+]
 
 let package = Package(
 	name: "SourceView",
@@ -11,7 +15,7 @@ let package = Package(
 	dependencies: [
 	],
 	targets: [
-		.target(name: "SourceView"),
-		.testTarget(name: "SourceViewTests", dependencies: ["SourceView"]),
+		.target(name: "SourceView", swiftSettings: settings),
+		.testTarget(name: "SourceViewTests", dependencies: ["SourceView"], swiftSettings: settings),
 	]
 )

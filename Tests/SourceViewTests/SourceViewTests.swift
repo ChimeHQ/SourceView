@@ -1,5 +1,5 @@
 import XCTest
-@testable import SourceView
+import SourceView
 
 final class SourceViewTests: XCTestCase {
     func testExample() throws {
