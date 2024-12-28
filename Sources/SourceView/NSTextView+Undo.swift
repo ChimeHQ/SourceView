@@ -1,9 +1,9 @@
 import AppKit
 
-public extension NSTextView {
+extension NSTextView {
 	/// Wraps operations in an undo group that will also restore selection
-	func withUndo<T>(named name: String? = nil, _ block: () throws -> T) rethrows -> T {
-		let currentSelection = selectedRanges
+	public func withUndo<T>(named name: String? = nil, _ block: () throws -> T) rethrows -> T {
+		let currentSelection = selectedRanges.map({ $0.rangeValue })
 
 		undoManager?.beginUndoGrouping()
 
@@ -11,8 +11,9 @@ public extension NSTextView {
 			undoManager?.setActionName(name)
 		}
 
-		undoManager?.registerUndo(withTarget: self, handler: { view in
-			view.selectedRanges = currentSelection
+
+		undoManager?.registerMainActorUndo(withTarget: self, handler: { view in
+			view.selectedRanges = currentSelection.map { NSValue(range: $0) }
 		})
 
 		let value = try block()

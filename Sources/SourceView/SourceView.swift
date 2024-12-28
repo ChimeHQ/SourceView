@@ -1,25 +1,32 @@
 import AppKit
-import OSLog
 
-open class SourceView: BaseTextView {
-	public override init(frame frameRect: NSRect, textContainer container: NSTextContainer?) {
-		precondition(container?.textLayoutManager != nil)
+import IBeam
+import Textbook
 
-		super.init(frame: frameRect, textContainer: container)
-	}
+open class SourceView: MultiCursorTextView {
+	private lazy var coordinator = TextSystemCursorCoordinator(
+		textView: self,
+		system: IBeamTextViewSystem(textView: self)
+	)
 
-	private let logger = Logger(subsystem: "com.chimehq.SourceView", category: "SourceView")
-
-	public init() {
-		let textContainer = NSTextContainer(size: CGSize(width: 0.0, height: 1.0e7))
-		textContainer.widthTracksTextView = true
-		textContainer.heightTracksTextView = false
+	/// Create a TextKit 2 view with a default cursor coordinator.
+	public convenience init() {
+		let textContainer = NSTextContainer(size: CGSize(width: 1000.0, height: 1.0e7))
 		let textContentManager = NSTextContentStorage()
 		let textLayoutManager = NSTextLayoutManager()
+
 		textLayoutManager.textContainer = textContainer
 		textContentManager.addTextLayoutManager(textLayoutManager)
 
-		super.init(frame: .zero, textContainer: textContainer)
+		self.init(frame: .zero, textContainer: textContainer)
+
+		self.cursorOperationHandler = coordinator.mutateCursors(with:)
+		self.operationProcessor = coordinator.processOperation(_:)
+	}
+
+	/// Create a minimally-configured view.
+	public init(frame frameRect: NSRect, textContainer container: NSTextContainer) {
+		super.init(frame: frameRect, textContainer: container)
 
 		postInitSetUp()
 	}
@@ -31,16 +38,26 @@ open class SourceView: BaseTextView {
 
 	private func postInitSetUp() {
 		// scrolling and resizing
-		let max = CGFloat.greatestFiniteMagnitude
-
-		minSize = NSSize.zero
-		maxSize = NSSize(width: max, height: max)
 		isVerticallyResizable = true
 		isHorizontallyResizable = true
-		autoresizingMask = [.width, .height]
+		textContainer?.widthTracksTextView = true
+		textContainer?.heightTracksTextView = false
+		minSize = NSSize.zero
+		maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
 
 		// behaviors
 		allowsUndo = true
-//		isRichText = false
+		isRichText = false
+		wrapsTextToHorizontalBounds = true
+
+		if textLayoutManager == nil {
+			layoutManager?.allowsNonContiguousLayout = true
+		}
+	}
+}
+
+extension SourceView {
+	private func superInsertText(_ string: AttributedString) {
+		super.insertText(NSAttributedString(string), replacementRange: NSRange(location: NSNotFound, length: 0))
 	}
 }

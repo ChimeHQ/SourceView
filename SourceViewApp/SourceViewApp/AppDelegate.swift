@@ -1,5 +1,6 @@
 import Cocoa
 
+import IBeam
 import SourceView
 
 @main
@@ -20,9 +21,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 final class ViewController: NSViewController {
-	let sourceView = SourceView()
+	let sourceView: SourceView
 
 	init() {
+		let textContainer = NSTextContainer(size: CGSize(width: 1000.0, height: 1.0e7))
+		let textContentManager = NSTextContentStorage()
+		let textLayoutManager = NSTextLayoutManager()
+
+		textLayoutManager.textContainer = textContainer
+		textContentManager.addTextLayoutManager(textLayoutManager)
+
+		self.sourceView = SourceView(frame: .zero, textContainer: textContainer)
+		
 		super.init(nibName: nil, bundle: nil)
 	}
 
@@ -33,6 +43,7 @@ final class ViewController: NSViewController {
 
 	override func loadView() {
 		sourceView.wrapsTextToHorizontalBounds = false
+		sourceView.font = .monospacedSystemFont(ofSize: 24.0, weight: .regular)
 
 		let scrollView = NSScrollView()
 		scrollView.hasHorizontalScroller = true

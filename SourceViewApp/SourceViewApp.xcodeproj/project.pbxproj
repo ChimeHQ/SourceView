@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C9655F882D11CD180008AED1 /* IBeam */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = IBeam; path = /Users/matt/Developer/IBeam; sourceTree = "<absolute>"; };
 		C9A52D2E2A6F0FEB00832564 /* SourceViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SourceViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A52D312A6F0FEB00832564 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9A52D332A6F0FEE00832564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -37,6 +38,7 @@
 		C9A52D252A6F0FEB00832564 = {
 			isa = PBXGroup;
 			children = (
+				C9655F882D11CD180008AED1 /* IBeam */,
 				C9A52D3E2A6F102900832564 /* SourceView */,
 				C9A52D302A6F0FEB00832564 /* SourceViewApp */,
 				C9A52D2F2A6F0FEB00832564 /* Products */,
@@ -84,6 +86,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				C9BDBB0A2AA49EA4003D25F7 /* PBXTargetDependency */,
+				C9BDBB082AA49EA2003D25F7 /* PBXTargetDependency */,
 				C9A52D402A6F116D00832564 /* PBXTargetDependency */,
 			);
 			name = SourceViewApp;
@@ -154,6 +158,14 @@
 		C9A52D402A6F116D00832564 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			productRef = C9A52D3F2A6F116D00832564 /* SourceView */;
+		};
+		C9BDBB082AA49EA2003D25F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = C9BDBB072AA49EA2003D25F7 /* BaseTextView */;
+		};
+		C9BDBB0A2AA49EA4003D25F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = C9BDBB092AA49EA4003D25F7 /* TextViewPlus */;
 		};
 /* End PBXTargetDependency section */
 
@@ -306,6 +318,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.SourceViewApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -333,6 +346,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.SourceViewApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -372,6 +386,14 @@
 		C9A52D422A6F117200832564 /* SourceView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SourceView;
+		};
+		C9BDBB072AA49EA2003D25F7 /* BaseTextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BaseTextView;
+		};
+		C9BDBB092AA49EA4003D25F7 /* TextViewPlus */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TextViewPlus;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
