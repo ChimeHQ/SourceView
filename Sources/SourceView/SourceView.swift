@@ -1,7 +1,6 @@
 import AppKit
 
 import IBeam
-import Textbook
 
 open class SourceView: MultiCursorTextView {
 	private lazy var coordinator = TextSystemCursorCoordinator(

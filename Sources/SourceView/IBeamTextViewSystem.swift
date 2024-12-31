@@ -1,7 +1,6 @@
 import AppKit
 
 import IBeam
-import Glyph
 import Ligature
 
 extension IBeam.TextGranularity {
