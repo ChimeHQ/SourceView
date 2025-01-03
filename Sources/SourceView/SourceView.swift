@@ -54,9 +54,3 @@ open class SourceView: MultiCursorTextView {
 		}
 	}
 }
-
-extension SourceView {
-	private func superInsertText(_ string: AttributedString) {
-		super.insertText(NSAttributedString(string), replacementRange: NSRange(location: NSNotFound, length: 0))
-	}
-}
