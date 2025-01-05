@@ -28,7 +28,7 @@ public struct IBeamTextViewSystem {
 	}
 }
 
-extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystem {
+extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 	public typealias TextRange = NSRange
 	public typealias TextPosition = Int
 
