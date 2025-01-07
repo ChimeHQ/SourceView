@@ -1,5 +1,5 @@
 {
-  "originHash" : "43ba331ee5e800c2f426a07b5f77b114630f0c742c6f58a08011884bd2c02d22",
+  "originHash" : "ee09842f842176deb49117bf75eb1863e383bf5a0faa7b4ee4f2037ff9529062",
   "pins" : [
     {
       "identity" : "glyph",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/ChimeHQ/Glyph",
       "state" : {
         "branch" : "main",
-        "revision" : "1ad045842d04479c93a3eea3742ab79943313b79"
+        "revision" : "25ffb2917c773ef6b8e54695f54e0cc55862dda2"
       }
     },
     {
@@ -15,7 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/IBeam",
       "state" : {
-        "revision" : "53e0ea98ce3fa299ebbd76bd7b17c561908c763c"
+        "branch" : "main",
+        "revision" : "ba2dc315a3b5c303f23459f90cc140987295ddd7"
       }
     },
     {
@@ -33,7 +34,7 @@
       "location" : "https://github.com/ChimeHQ/Ligature",
       "state" : {
         "branch" : "main",
-        "revision" : "324ca471b3d0a949eb8cb1107a6e89bc311651c7"
+        "revision" : "9e1c74907558cff5ce43615e24191f87baade69a"
       }
     },
     {

@@ -23,8 +23,8 @@ public struct IBeamTextViewSystem {
 		self.tokenizer = UTF16CodePointTextViewTextTokenizer(textView: textView)
 	}
 
-	private var partialSystem: MutableStringPartialSystem {
-		MutableStringPartialSystem(textView.textStorage ?? NSTextStorage())
+	private var partialSystem: MutableStringPartialInterface {
+		MutableStringPartialInterface(textView.textStorage ?? NSTextStorage())
 	}
 }
 
@@ -85,6 +85,10 @@ extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 	public func endEditing() { partialSystem.endEditing() }
 
 	public func applyMutation(_ range: TextRange, string: AttributedString) -> MutationOutput<TextRange>? {
-		partialSystem.applyMutation(in: range, string: string, undoManager: textView.undoManager)
+		partialSystem.applyMutation(range, string: string, undoManager: textView.undoManager)
+	}
+
+	public func applyMutation(_ range: TextRange, string: NSAttributedString) -> MutationOutput<TextRange>? {
+		partialSystem.applyMutation(range, string: string, undoManager: textView.undoManager)
 	}
 }
