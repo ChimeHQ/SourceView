@@ -20,7 +20,17 @@ open class SourceView: MultiCursorTextView {
 		self.init(frame: .zero, textContainer: textContainer)
 
 		self.cursorOperationHandler = coordinator.mutateCursors(with:)
-		self.operationProcessor = coordinator.processOperation(_:)
+		self.operationProcessor = { [coordinator] in
+			do {
+				try coordinator.processOperation($0)
+			} catch {
+				print("failed to process input operation \(error)")
+
+				return false
+			}
+
+			return true
+		}
 	}
 
 	/// Create a minimally-configured view.
