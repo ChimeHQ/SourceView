@@ -2,6 +2,7 @@ import AppKit
 
 import IBeam
 import Ligature
+import Rearrange
 
 extension IBeam.TextGranularity {
 	var ligatureGranulaity: Ligature.TextGranularity {
@@ -14,7 +15,7 @@ extension IBeam.TextGranularity {
 }
 
 @MainActor
-public struct IBeamTextViewSystem {
+public final class IBeamTextViewSystem {
 	public let textView: NSTextView
 	let tokenizer: UTF16CodePointTextViewTextTokenizer
 
@@ -25,6 +26,12 @@ public struct IBeamTextViewSystem {
 
 	private var partialSystem: MutableStringPartialInterface {
 		MutableStringPartialInterface(textView.textStorage ?? NSTextStorage())
+	}
+}
+
+extension IBeamTextViewSystem : @preconcurrency Rearrange.TextRangeCalculating {
+	public func offset(from: Position, to toPosition: Position) -> Int {
+		partialSystem.offset(from: from, to: toPosition)
 	}
 }
 
@@ -70,10 +77,6 @@ extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 
 	public func compare(_ position: TextPosition, to other: TextPosition) -> ComparisonResult {
 		partialSystem.compare(position, to: other)
-	}
-
-	public func positions(composing range: TextRange) -> (TextPosition, TextPosition) {
-		partialSystem.positions(composing: range)
 	}
 
 	public func textRange(from start: TextPosition, to end: TextPosition) -> TextRange? {

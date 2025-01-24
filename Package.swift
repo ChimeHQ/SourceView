@@ -14,6 +14,7 @@ let package = Package(
 		.package(url: "https://github.com/ChimeHQ/IBeam", branch: "main"),
 		.package(url: "https://github.com/ChimeHQ/KeyCodes", from: "1.0.3"),
 		.package(url: "https://github.com/ChimeHQ/Ligature", branch: "main"),
+		.package(url: "https://github.com/ChimeHQ/Rearrange", branch: "main"),
 		.package(url: "https://github.com/ChimeHQ/Textbook", revision: "a70d9cd0b7da1878e1db448283b431834fd00376"),
 	],
 	targets: [
@@ -23,6 +24,7 @@ let package = Package(
 				"IBeam",
 				"KeyCodes",
 				"Ligature",
+				"Rearrange",
 				"Textbook",
 			]
 		),
