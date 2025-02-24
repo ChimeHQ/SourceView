@@ -29,12 +29,6 @@ public final class IBeamTextViewSystem {
 	}
 }
 
-extension IBeamTextViewSystem : @preconcurrency Rearrange.TextRangeCalculating {
-	public func offset(from: Position, to toPosition: Position) -> Int {
-		partialSystem.offset(from: from, to: toPosition)
-	}
-}
-
 extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 	public typealias TextRange = NSRange
 	public typealias TextPosition = Int
@@ -63,25 +57,12 @@ extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 		}
 	}
 
-	public func position(from start: TextPosition, offset: Int) -> TextPosition? {
-		partialSystem.position(from: start, offset: offset)
-	}
-
 	public func layoutDirection(at position: TextPosition) -> IBeam.TextLayoutDirection? {
 		partialSystem.layoutDirection(at: position)
 	}
 
 	// range calculation
-	public var beginningOfDocument: TextPosition { partialSystem.beginningOfDocument }
 	public var endOfDocument: TextPosition { partialSystem.endOfDocument }
-
-	public func compare(_ position: TextPosition, to other: TextPosition) -> ComparisonResult {
-		partialSystem.compare(position, to: other)
-	}
-
-	public func textRange(from start: TextPosition, to end: TextPosition) -> TextRange? {
-		partialSystem.textRange(from: start, to: end)
-	}
 
 	// content mutation
 	public func beginEditing() { partialSystem.beginEditing() }
