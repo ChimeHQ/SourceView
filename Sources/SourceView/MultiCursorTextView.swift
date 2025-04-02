@@ -107,5 +107,11 @@ extension MultiCursorTextView {
 
 		NSSound.beep()
 	}
+	
+	open override func cut(_ sender: Any?) {
+		let pasteboard = NSPasteboard.general
+		
+		
+	}
 }
 #endif
