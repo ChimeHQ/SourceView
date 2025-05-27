@@ -1,3 +1,4 @@
+#if canImport(AppKit)
 import AppKit
 
 extension NSPasteboard {
@@ -22,3 +23,4 @@ extension NSPasteboard {
 		return array
 	}
 }
+#endif

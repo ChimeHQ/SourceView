@@ -1,3 +1,4 @@
+#if canImport(AppKit)
 import AppKit
 
 extension NSTextView {
@@ -23,3 +24,4 @@ extension NSTextView {
 		return value
 	}
 }
+#endif

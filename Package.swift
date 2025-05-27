@@ -6,6 +6,9 @@ let package = Package(
 	name: "SourceView",
 	platforms: [
 		.macOS(.v14),
+		.macCatalyst(.v17),
+		.iOS(.v17),
+		.visionOS(.v1),
 	],
 	products: [
 		.library(name: "SourceView", targets: ["SourceView"]),

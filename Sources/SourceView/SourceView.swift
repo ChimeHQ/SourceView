@@ -1,3 +1,4 @@
+#if canImport(AppKit)
 import AppKit
 
 import IBeam
@@ -64,3 +65,4 @@ open class SourceView: MultiCursorTextView {
 		}
 	}
 }
+#endif
