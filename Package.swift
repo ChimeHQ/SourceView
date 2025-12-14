@@ -18,7 +18,8 @@ let package = Package(
 		.package(url: "https://github.com/ChimeHQ/KeyCodes", from: "1.0.3"),
 		.package(url: "https://github.com/ChimeHQ/Ligature", branch: "main"),
 		.package(url: "https://github.com/ChimeHQ/Rearrange", branch: "main"),
-		.package(url: "https://github.com/ChimeHQ/Textbook", revision: "a70d9cd0b7da1878e1db448283b431834fd00376"),
+		.package(url: "https://github.com/ChimeHQ/TextFormation", branch: "main"),
+		.package(url: "https://github.com/ChimeHQ/Textbook", branch: "main"),
 	],
 	targets: [
 		.target(
@@ -28,6 +29,7 @@ let package = Package(
 				"KeyCodes",
 				"Ligature",
 				"Rearrange",
+				"TextFormation",
 				"Textbook",
 			]
 		),

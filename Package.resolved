@@ -1,5 +1,5 @@
 {
-  "originHash" : "4e9a3e3287f669e4716c5c1782f8c5fa37a7218cbfafecb27e39ebd13e136338",
+  "originHash" : "d4e85584f0e60c77ba3bbae935c52abb5acbf3a14814d51e237c5a305e729b46",
   "pins" : [
     {
       "identity" : "glyph",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/ChimeHQ/IBeam",
       "state" : {
         "branch" : "main",
-        "revision" : "5ed3821bc6879cbaa995111378253d35e36d1b59"
+        "revision" : "349ae9079a914eea36fb9d856bd2c0ba6c07adfd"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/ChimeHQ/Rearrange",
       "state" : {
         "branch" : "main",
-        "revision" : "eae38792ce4cc4c8ba74632d63109b35163f5877"
+        "revision" : "e22fe9dae6166dce2de45b7bb94b481f78affd3e"
       }
     },
     {
@@ -51,7 +51,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/Textbook",
       "state" : {
-        "revision" : "a70d9cd0b7da1878e1db448283b431834fd00376"
+        "branch" : "main",
+        "revision" : "bee65ad3b2bf4ccbb54e254ad00bfbe03156a456"
+      }
+    },
+    {
+      "identity" : "textformation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChimeHQ/TextFormation",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2dda10f8c206e23714900c0279f6020c3ebbd576"
       }
     }
   ],

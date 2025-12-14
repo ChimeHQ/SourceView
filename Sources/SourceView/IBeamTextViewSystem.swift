@@ -69,8 +69,8 @@ extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 	public func beginEditing() { partialSystem.beginEditing() }
 	public func endEditing() { partialSystem.endEditing() }
 
-	public func applyMutation(_ range: TextRange, string: AttributedString) throws -> MutationOutput<TextRange> {
-		partialSystem.applyMutation(range, string: string, undoManager: textView.undoManager)
+	public func applyMutation(_ mutation: IBeam.TextMutation<NSRange>) throws -> MutationOutput<NSRange> {
+		partialSystem.applyMutation(mutation, undoManager: textView.undoManager)
 	}
 
 	public func applyMutation(_ range: TextRange, string: NSAttributedString) throws -> MutationOutput<TextRange> {

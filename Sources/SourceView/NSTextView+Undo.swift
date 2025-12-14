@@ -13,7 +13,7 @@ extension NSTextView {
 		}
 
 
-		undoManager?.registerMainActorUndo(withTarget: self, handler: { view in
+		undoManager?.registerUndo(withTarget: self, handler: { view in
 			view.selectedRanges = currentSelection.map { NSValue(range: $0) }
 		})
 
