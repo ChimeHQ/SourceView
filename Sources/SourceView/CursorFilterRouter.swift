@@ -42,11 +42,10 @@ public final class CursorFilterRouter<CompletingSystem: TextFormation.TextSystem
 			try filter.processShift(by: offset, interface: baseSystem)
 		}
 
-		let attrString = NSAttributedString(ibeamMutation.string)
 		let mutation = TextMutation(
 			range: ibeamMutation.range,
 			interface: baseSystem,
-			string: attrString.string
+			string: ibeamMutation.string
 		)
 
 		let filterOutput = try filter.processMutation(mutation)
@@ -57,7 +56,7 @@ public final class CursorFilterRouter<CompletingSystem: TextFormation.TextSystem
 			return IBeam.MutationOutput(filterOutput)
 		}
 
-		let output = try baseSystem.applyMutation(ibeamMutation.range, string: attrString.string)
+		let output = try baseSystem.applyMutation(ibeamMutation.range, string: ibeamMutation.string)
 
 		return IBeam.MutationOutput(output)
 	}

@@ -4,6 +4,7 @@ import AppKit
 import IBeam
 import KeyCodes
 import Textbook
+import Rearrange
 
 extension KeyModifierFlags {
 	var addingCursor: Bool {
@@ -14,26 +15,24 @@ extension KeyModifierFlags {
 open class MultiCursorTextView: BaseTextView {
 	public var operationProcessor: (InputOperation) -> Bool = { _ in false }
 	public var cursorOperationHandler: (CursorOperation<NSRange>) -> Void = { _ in }
-}
 
-extension MultiCursorTextView {
 	open override func insertText(_ input: Any, replacementRange: NSRange) {
 		// also should handle replacementRange values
 
-		let attrString: AttributedString
+		let op: InputOperation
 
 		switch input {
 		case let string as String:
-			let container = AttributeContainer(typingAttributes)
-
-			attrString = AttributedString(string, attributes: container)
+			op = .insertText(string)
 		case let string as NSAttributedString:
-			attrString = AttributedString(string)
+			let attrString = AttributedString(string)
+
+			op = .insertAttributedString(attrString)
 		default:
 			fatalError("This API should be called with NSString or NSAttributedString only")
 		}
 
-		if operationProcessor(.insertText(attrString)) {
+		if operationProcessor(op) {
 			return
 		}
 
@@ -109,9 +108,20 @@ extension MultiCursorTextView {
 	}
 	
 	open override func cut(_ sender: Any?) {
-		let pasteboard = NSPasteboard.general
+//		let pasteboard = NSPasteboard.general
 		
 		
+	}
+
+	public override var shouldDrawInsertionPoint: Bool {
+		false
+	}
+
+	public override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
+	}
+
+	public override func updateInsertionPointStateAndRestartTimer(_ restartFlag: Bool) {
+		// this needs to be overridden to suppress drawing the insertion point
 	}
 }
 #endif

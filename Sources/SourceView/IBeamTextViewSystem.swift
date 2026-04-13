@@ -17,25 +17,46 @@ extension IBeam.TextGranularity {
 
 @MainActor
 public final class IBeamTextViewSystem {
-	public let textView: NSTextView
-	let tokenizer: UTF16CodePointTextViewTextTokenizer
+	private weak var textView: NSTextView?
+	private var cachedSystem: MutableStringPartialInterface?
+	private var cachedId: ObjectIdentifier?
 
 	public init(textView: NSTextView) {
 		self.textView = textView
-		self.tokenizer = UTF16CodePointTextViewTextTokenizer(textView: textView)
 	}
 
 	private var partialSystem: MutableStringPartialInterface {
-		MutableStringPartialInterface(textView.textStorage ?? NSTextStorage())
+		let storage = textView?.textStorage ?? NSTextStorage()
+
+		let id = ObjectIdentifier(storage)
+
+		if cachedId == id, let system = cachedSystem {
+			return system
+		}
+
+		let system = MutableStringPartialInterface(storage)
+
+		self.cachedSystem = system
+		self.cachedId = id
+
+		return system
+	}
+
+	private var undoManager: UndoManager? {
+		textView?.undoManager
+	}
+
+	private var tokenizer: UTF16CodePointTextViewTextTokenizer? {
+		textView.flatMap { UTF16CodePointTextViewTextTokenizer(textView: $0) }
 	}
 }
 
-extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
+extension IBeamTextViewSystem: @MainActor IBeam.TextSystemInterface {
 	public typealias TextRange = NSRange
 	public typealias TextPosition = Int
 
 	public func boundingRect(for range: NSRange) -> CGRect? {
-		tokenizer.boundingRect(for: range)
+		tokenizer?.boundingRect(for: range)
 	}
 
 	// movement calculation
@@ -44,17 +65,17 @@ extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 
 		switch direction {
 		case .forward:
-			return tokenizer.position(from: position, toBoundary: ligGranularity, inDirection: .storage(.forward))
+			return tokenizer?.position(from: position, toBoundary: ligGranularity, inDirection: .storage(.forward))
 		case .backward:
-			return tokenizer.position(from: position, toBoundary: ligGranularity, inDirection: .storage(.backward))
+			return tokenizer?.position(from: position, toBoundary: ligGranularity, inDirection: .storage(.backward))
 		case .left:
-			return tokenizer.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.left))
+			return tokenizer?.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.left))
 		case .right:
-			return tokenizer.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.right))
+			return tokenizer?.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.right))
 		case let .down(alignment):
-			return tokenizer.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.down), alignment: alignment)
+			return tokenizer?.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.down), alignment: alignment)
 		case let .up(alignment):
-			return tokenizer.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.up), alignment: alignment)
+			return tokenizer?.position(from: position, toBoundary: ligGranularity, inDirection: .layout(.up), alignment: alignment)
 		}
 	}
 
@@ -70,11 +91,11 @@ extension IBeamTextViewSystem : @preconcurrency IBeam.TextSystemInterface {
 	public func endEditing() { partialSystem.endEditing() }
 
 	public func applyMutation(_ mutation: IBeam.TextMutation<NSRange>) throws -> MutationOutput<NSRange> {
-		partialSystem.applyMutation(mutation, undoManager: textView.undoManager)
+		partialSystem.applyMutation(mutation, undoManager: undoManager)
 	}
 
-	public func applyMutation(_ range: TextRange, string: NSAttributedString) throws -> MutationOutput<TextRange> {
-		partialSystem.applyMutation(range, string: string, undoManager: textView.undoManager)
+	public func applyMutation(_ range: TextRange, string: String) throws -> MutationOutput<TextRange> {
+		partialSystem.applyMutation(range, string: string, undoManager: undoManager)
 	}
 }
 #endif
