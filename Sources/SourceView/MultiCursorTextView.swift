@@ -88,7 +88,7 @@ open class MultiCursorTextView: BaseTextView {
 	open override func paste(_ sender: Any?) {
 		let pasteboard = NSPasteboard.general
 
-		// this path has not fallback
+		// this path has no fallback
 		if let stringArray = pasteboard.multipleTextSelectionStrings() {
 			if operationProcessor(.insertTextArray(stringArray)) == false {
 				NSSound.beep()
