@@ -16,6 +16,15 @@ open class MultiCursorTextView: BaseTextView {
 	public var operationProcessor: (InputOperation) -> Bool = { _ in false }
 	public var cursorOperationHandler: (CursorOperation<NSRange>) -> Void = { _ in }
 
+	private var selectedTextValues: [String] {
+		selectedRanges.map { (value: NSValue) -> String in
+			let string = textStorage?.string as? NSString
+
+			let substring = string?.substring(with: value.rangeValue) as? String
+			return substring ?? ""
+		}
+	}
+
 	open override func insertText(_ input: Any, replacementRange: NSRange) {
 		// also should handle replacementRange values
 
@@ -85,6 +94,13 @@ open class MultiCursorTextView: BaseTextView {
 		}
 	}
 
+	open override func copy(_ sender: Any?) {
+		let pasteboard = NSPasteboard.general
+
+		pasteboard.clearContents()
+		pasteboard.setMultipleTextSelectionStrings(selectedTextValues)
+	}
+
 	open override func paste(_ sender: Any?) {
 		let pasteboard = NSPasteboard.general
 
@@ -108,9 +124,16 @@ open class MultiCursorTextView: BaseTextView {
 	}
 	
 	open override func cut(_ sender: Any?) {
-//		let pasteboard = NSPasteboard.general
-		
-		
+		let pasteboard = NSPasteboard.general
+
+		pasteboard.clearContents()
+		pasteboard.setMultipleTextSelectionStrings(selectedTextValues)
+
+		if operationProcessor(.deleteBackwards(.character)) {
+			return
+		}
+
+		NSSound.beep()
 	}
 
 	public override var shouldDrawInsertionPoint: Bool {

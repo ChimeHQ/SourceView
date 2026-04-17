@@ -18,15 +18,14 @@ struct MultiCursorTextViewTests {
 		}
 			
 		let pasteboard = NSPasteboard.general
-		
+
+		pasteboard.clearContents()
 		pasteboard.setString("hello", forType: .string)
-		pasteboard.setPropertyList("abc", forType: .multipleTextSelection)
 		
 		view.paste(self)
-		
-		switch value {
-		default:
-			break
-		}
+
+		guard case .insertText(let string) = value else { Issue.record("invalid operation"); return }
+
+		#expect(string == "hello")
     }
 }

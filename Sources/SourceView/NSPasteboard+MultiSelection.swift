@@ -22,5 +22,18 @@ extension NSPasteboard {
 
 		return array
 	}
+
+	func setMultipleTextSelectionStrings(_ strings: [String], with seperator: String = "\n") {
+		let joined = strings.joined(separator: seperator)
+		setString(joined, forType: .string)
+
+		let counts = strings.map { string in
+			string.components(separatedBy: seperator).count
+		}
+
+		guard counts.count > 1 else { return }
+
+		setPropertyList(counts, forType: .multipleTextSelection)
+	}
 }
 #endif
