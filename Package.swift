@@ -16,8 +16,8 @@ let package = Package(
 	dependencies: [
 		.package(url: "https://github.com/ChimeHQ/IBeam", branch: "main"),
 		.package(url: "https://github.com/ChimeHQ/KeyCodes", from: "1.0.3"),
-		.package(url: "https://github.com/ChimeHQ/Ligature", branch: "main"),
-		.package(url: "https://github.com/ChimeHQ/Rearrange", branch: "main"),
+		.package(url: "https://github.com/ChimeHQ/Ligature", from: "0.1.0"),
+		.package(url: "https://github.com/ChimeHQ/Rearrange", from: "2.1.0"),
 		.package(url: "https://github.com/ChimeHQ/TextFormation", branch: "main"),
 		.package(url: "https://github.com/ChimeHQ/Textbook", branch: "main"),
 	],
