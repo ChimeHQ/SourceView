@@ -12,7 +12,7 @@ Features:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/ChimeHQ/SourceView")
+    .package(url: "https://github.com/ChimeHQ/SourceView", branch: "main")
 ]
 ```
 
@@ -50,12 +50,6 @@ Indentation turns out to be both very complex and potentially expensive. SourceV
 // Restores text selection on undo
 func withUndo(named name: String? = nil, _ block: () throws -> Void) rethrows {
 ```
-
-## Contributing and Collaboration
-
-I prefer collaboration, and would love to find ways to work together if you have a similar project.
-
-I prefer indentation with tabs for improved accessibility. But, I'd rather you use the system you want and make a PR than hesitate because of whitespace.
 
 ## Contributing and Collaboration
 

@@ -45,7 +45,7 @@ extension MultiCursorTransformingPartialSystem {
 	}
 	
 	public func position(from position: Position, moving direction: IBeam.TextDirection, by granularity: IBeam.TextGranularity) -> Position? {
-		let ligGranularity =  granularity.ligatureGranulaity
+		let ligGranularity =  Ligature.TextGranularity(granularity)
 
 		switch direction {
 		case .forward:

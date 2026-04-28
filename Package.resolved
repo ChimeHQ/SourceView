@@ -1,5 +1,5 @@
 {
-  "originHash" : "fe5b223a3ddbc439d96938db17ebd66afa3ea91de0af1bb18f394b00b3c107a7",
+  "originHash" : "82e949196ceb91141c049d4c72f52d87e70d376d3531c674e8907dedb7878219",
   "pins" : [
     {
       "identity" : "glyph",
@@ -15,8 +15,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/IBeam",
       "state" : {
-        "branch" : "main",
-        "revision" : "8b13d99609296b3cea828f1fef13269af4a4e7e0"
+        "revision" : "d02f0b65f6e15d1adce7d3932136cbb5697376c0"
       }
     },
     {
@@ -33,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChimeHQ/Ligature",
       "state" : {
-        "revision" : "e260df8c26a93cd712ef66758c812c63e0817c9f",
-        "version" : "0.1.0"
+        "revision" : "677abb3ad29e0979248f062dc969c16160951217",
+        "version" : "0.1.1"
       }
     },
     {
