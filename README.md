@@ -18,7 +18,7 @@ dependencies: [
 
 ## BaseTextView
 
-`SourceView` is a sublcass of `BaseTextView` from [TextViewPlus](https://github.com/chimeHQ/TextViewPlus). That class includes many customization options that can be useful for building a source editor.
+`SourceView` is a sublcass of `BaseTextView` from [Textbook](https://github.com/ChimeHQ/Textbook). That class includes many customization options that can be useful for building a source editor.
 
 ## Behaviors
 
