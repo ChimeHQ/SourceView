@@ -14,7 +14,7 @@ let package = Package(
 		.library(name: "SourceView", targets: ["SourceView"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ChimeHQ/IBeam", revision: "d02f0b65f6e15d1adce7d3932136cbb5697376c0", traits: ["ViewSupport"]),
+		.package(url: "https://github.com/ChimeHQ/IBeam", branch: "main", traits: ["ViewSupport"]),
 		.package(url: "https://github.com/ChimeHQ/KeyCodes", from: "1.0.3"),
 		.package(url: "https://github.com/ChimeHQ/Ligature", from: "0.1.0"),
 		.package(url: "https://github.com/ChimeHQ/Rearrange", from: "2.1.0"),
