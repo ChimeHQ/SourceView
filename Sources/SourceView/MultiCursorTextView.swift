@@ -49,6 +49,11 @@ open class MultiCursorTextView: BaseTextView {
 	}
 
 	open override func doCommand(by selector: Selector) {
+		// give the delegate a chance
+		if delegate?.textView?(self, doCommandBy: selector) == true {
+			return
+		}
+
 		if let op = InputOperation(selector: selector) {
 			if operationProcessor(op) {
 				return
